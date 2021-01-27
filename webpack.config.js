@@ -9,9 +9,19 @@ module.exports = {
   },
   module: {
     rules: [
+      // for css modules
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true
+            }
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/,
@@ -20,7 +30,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
     ],
   },
