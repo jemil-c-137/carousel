@@ -1,0 +1,108 @@
+:global *,
+:global *::before,
+:global *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-top: 100px;
+}
+
+:global body {
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 200px;
+}
+
+.container {
+  padding-top: 20px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carouselContainerOne {
+  width: 100%;
+  max-height: 400px;
+}
+
+.carouselContainerTwo {
+  width: 40%;
+  height: fit-content;
+}
+
+.textContainer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  line-height: 1.2;
+  font-family: 'Roboto', sans-serif;
+}
+
+.textContainer p {
+  width: 50%;
+  text-align: justify;
+}
+
+.tripleContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.carouselBox {
+  margin: 0 10px;
+}
+
+.carouselBox {
+  width: 100%;
+}
+
+.fullScreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+@media only screen and (max-width:900px) {
+  .tripleContainer {
+    flex-direction: column;
+    max-width: fit-content;
+  }
+  .carouselBox:not(:last-child) {
+    border-right: none;
+    width: 50%;
+    margin:10px auto;
+  }
+}
+
+
+@media only screen and (max-width:768px) {
+  .textContainer {
+    flex-direction: column-reverse;
+  }
+
+  .textContainer p {
+    width: 100%;
+  }
+
+  .carouselContainerTwo {
+    width: 100%;
+  }
+
+}
+
+@media only screen and (max-width:575px) {
+  .carouselBox + div{
+    width: 100%;
+  }
+
+}
