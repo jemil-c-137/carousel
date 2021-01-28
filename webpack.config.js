@@ -49,7 +49,7 @@ const config = {
 };
 
 if (currentTask == 'build') {
-  config.mode === 'production';
+  config.mode = 'production';
   config.module.rules[0].use[0] = MiniCssExtractPlugin.loader;
   config.plugins.push(new MiniCssExtractPlugin({ filename: 'main.[contenthash].css' }), new CleanWebpackPlugin());
   config.optimization = {
