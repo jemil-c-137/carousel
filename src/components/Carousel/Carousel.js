@@ -6,19 +6,17 @@ const Carousel = ({ images }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const sliderTrack = useRef(null);
   const imagesTotal = images.length - 1;
+  
   let slideStep = 100 / images.length;
   let transformTotal = 0; // to keep total translatedX value
   let transformValue = 0; // value to scroll from selected image
-
 
   let touchInitialPosition = 0;
 
   const handleNext = () => {
     if (selectedIndex >= 0 && selectedIndex < imagesTotal) {
-
       slide(selectedIndex + 1);
     } else {
-
       slide(0);
     }
   };
@@ -39,7 +37,7 @@ const Carousel = ({ images }) => {
   };
 
   const slide = (index) => {
-    setSelectedIndex(index)
+    setSelectedIndex(index);
     sliderTrack.current.style.transform = `translateX(-${index * slideStep}%)`;
   };
 
@@ -50,12 +48,9 @@ const Carousel = ({ images }) => {
     if (transformMatrix !== 'none') {
       transformTotal = +transformMatrix.split(',')[4].trim();
     }
-
-    
   };
 
   const handleTouchStop = (e) => {
-
     let newPosition = parseInt(e.changedTouches[0].clientX);
     const diff = newPosition - touchInitialPosition;
 
@@ -67,7 +62,7 @@ const Carousel = ({ images }) => {
       slide(0);
       return;
     }
-    
+
     if (selectedIndex === 0 && diff > scrollSpeed) {
       slide(imagesTotal);
       return;
@@ -80,7 +75,6 @@ const Carousel = ({ images }) => {
     if (diff > scrollSpeed) {
       slide(selectedIndex - 1);
       return;
-  
     } else {
       slide(selectedIndex);
       return;
@@ -88,13 +82,12 @@ const Carousel = ({ images }) => {
   };
 
   const handleTouchMove = (e) => {
-      let newTouchPosition = parseInt(e.changedTouches[0].clientX);
-      const difference = newTouchPosition - touchInitialPosition;
-      // set finger-following scroll transform
-      transformValue = transformTotal + difference;
-      sliderTrack.current.style.transform = `translateX(${transformValue}px)`;
+    let newTouchPosition = parseInt(e.changedTouches[0].clientX);
+    const difference = newTouchPosition - touchInitialPosition;
+    // set finger-following scroll transform
+    transformValue = transformTotal + difference;
+    sliderTrack.current.style.transform = `translateX(${transformValue}px)`;
   };
-
 
   return (
     <div className={styles.carouselContainer}>
@@ -119,25 +112,23 @@ const Carousel = ({ images }) => {
             })}
           </div>
           <div className={styles.arrowContainerLeft}>
-            <div className={`${styles.btn} ${styles.btnPrev} ${styles.arrowLeft} `} onClick={handlePrev}></div>
+            <div className={`${styles.btn} ${styles.btnPrev} ${styles.arrowLeft}`} onClick={handlePrev}></div>
           </div>
           <div className={styles.arrowContainerRight}>
-            <div className={`${styles.btn} ${styles.btnNext} ${styles.arrowRight} `} onClick={handleNext}></div>
+            <div className={`${styles.btn} ${styles.btnNext} ${styles.arrowRight}`} onClick={handleNext}></div>
           </div>
-          
         </div>
-        
-          <div className={styles.dots}>
-            {images.map((item, index) => (
-              <span
-                style={{ width: `${index === selectedIndex ? images.length * 1.5 : images.length}%` }}
-                onClick={() => goToIndex(index)}
-                key={item.src + index}
-                className={`${styles.dot} ${index === selectedIndex ? styles.active : ''}`}
-              ></span>
-            ))}
-          </div>
-        
+
+        <div className={styles.dots}>
+          {images.map((item, index) => (
+            <span
+              style={{ width: `${index === selectedIndex ? images.length * 1.5 : images.length}%` }}
+              onClick={() => goToIndex(index)}
+              key={item.src + index}
+              className={`${styles.dot} ${index === selectedIndex ? styles.active : ''}`}
+            ></span>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -60,19 +60,11 @@ h2 {
 }
 
 .carouselBox {
+  width: 100%;
   margin: 0 10px;
 }
 
-.carouselBox {
-  width: 100%;
-}
-
-.fullScreen {
-  width: 100vw;
-  height: 100vh;
-}
-
-@media only screen and (max-width:900px) {
+@media only screen and (max-width: 900px) {
   .tripleContainer {
     flex-direction: column;
     max-width: fit-content;
@@ -80,12 +72,11 @@ h2 {
   .carouselBox:not(:last-child) {
     border-right: none;
     width: 50%;
-    margin:10px auto;
+    margin: 10px auto;
   }
 }
 
-
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .textContainer {
     flex-direction: column-reverse;
   }
@@ -97,12 +88,10 @@ h2 {
   .carouselContainerTwo {
     width: 100%;
   }
-
 }
 
-@media only screen and (max-width:575px) {
-  .carouselBox + div{
+@media only screen and (max-width: 575px) {
+  .carouselBox div {
     width: 100%;
   }
-
 }

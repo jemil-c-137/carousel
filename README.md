@@ -31,3 +31,9 @@ export const imagesArray = [
   }
 ]
 ```
+
+To bundle application in production mode use:
+```
+npm run build
+
+```
