@@ -2,7 +2,7 @@
 
 **Images slider for React**. Supports swipes(mobile), responsive, supports 'goto' functionality.
 
-**🎠 [Click to see the demo](https://jemil-c-137.github.io/carousel/)**
+##🎠 [Click to see the demo](https://jemil-c-137.github.io/carousel/)**
 
 
 to start demo app in developing mode:
