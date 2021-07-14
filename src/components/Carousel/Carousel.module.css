@@ -2,6 +2,8 @@
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+  transform: rotate(90deg);
+  background: lightcoral;
 }
 
 .carouselWrapper {
@@ -28,7 +30,7 @@
 .sliderItem {
   flex-basis: 100%;
   width: 100%;
-  padding: 0 70px; /* TODO: Придумать что-то с паддингом */
+  transform: rotate(-90deg);
 }
 
 .sliderImageWrapper {

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styles from './Carousel.module.css';
 
-const Carousel = ({ images, children }) => {
+const Carousel = ({ images, children, goTo, arrows, infiniteScroll }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [blockScroll, setBlockScroll] = useState(false);
   const sliderTrack = useRef(null);
@@ -16,7 +16,7 @@ const Carousel = ({ images, children }) => {
   const handleNext = () => {
     if (selectedIndex >= 0 && selectedIndex < imagesTotal) {
       slide(selectedIndex + 1);
-    } else {
+    } else if (infiniteScroll) {
       slide(0);
     }
   };
@@ -30,7 +30,7 @@ const Carousel = ({ images, children }) => {
     if (selectedIndex > 0) {
       //setSelectedIndex(selectedIndex - 1);
       slide(selectedIndex - 1);
-    } else {
+    } else if (infiniteScroll) {
       //setSelectedIndex(imagesTotal);
       slide(imagesTotal);
     }
@@ -89,20 +89,20 @@ const Carousel = ({ images, children }) => {
     sliderTrack.current.style.transform = `translateX(${transformValue}px)`;
   };
 
-  console.log('rernder')
 
   const handlerScroll = (e) => {
+    console.log('rernder', e);
     if (e.deltaY > 0 && !blockScroll) {
-      setBlockScroll(true)
+      setBlockScroll(true);
       handleNext();
-      setTimeout(setBlockScroll(false), 3000)
+      setTimeout(setBlockScroll(false), 3000);
       return;
     }
     if (e.deltaY < 0 && !blockScroll) {
-      setBlockScroll(true)
+      setBlockScroll(true);
       handlePrev();
-      setTimeout(setBlockScroll(false), 3000)
-      return
+      setTimeout(setBlockScroll(false), 3000);
+      return;
     }
   };
 
@@ -126,23 +126,29 @@ const Carousel = ({ images, children }) => {
               );
             })}
           </div>
-          <div className={styles.arrowContainerLeft}>
-            <div className={`${styles.btn} ${styles.btnPrev} ${styles.arrowLeft}`} onClick={handlePrev}></div>
-          </div>
-          <div className={styles.arrowContainerRight}>
-            <div className={`${styles.btn} ${styles.btnNext} ${styles.arrowRight}`} onClick={handleNext}></div>
-          </div>
+          {arrows && (
+            <div className={styles.arrowContainerLeft}>
+              <div className={`${styles.btn} ${styles.btnPrev} ${styles.arrowLeft}`} onClick={handlePrev}></div>
+            </div>
+          )}
+          {arrows && (
+            <div className={styles.arrowContainerRight}>
+              <div className={`${styles.btn} ${styles.btnNext} ${styles.arrowRight}`} onClick={handleNext}></div>
+            </div>
+          )}
         </div>
 
-        <div className={styles.dots}>
-          {children.map((child, index) => (
-            <span
-              style={{ width: `${index === selectedIndex ? children.length * 1.5 : children.length}%` }}
-              onClick={() => goToIndex(index)}
-              key={child + index}
-              className={`${styles.dot} ${index === selectedIndex ? styles.active : ''}`}></span>
-          ))}
-        </div>
+        {goTo && (
+          <div className={styles.dots}>
+            {children.map((child, index) => (
+              <span
+                style={{ width: `${index === selectedIndex ? children.length * 1.5 : children.length}%` }}
+                onClick={() => goToIndex(index)}
+                key={child + index}
+                className={`${styles.dot} ${index === selectedIndex ? styles.active : ''}`}></span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
