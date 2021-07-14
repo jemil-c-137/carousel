@@ -10,9 +10,19 @@ export const App = () => {
       <h1>Carousel demo</h1>
       <div className={styles.wrapper}>
         <div className={styles.carouselContainerOne}>
-          <Carousel images={wideImages}></Carousel>
+          <Carousel>
+            <img src={imagesLibrary[0].src}/>
+            <p>Hello</p>
+            <h1>Aloha</h1>
+            <div>
+              <div>Hello</div>
+              <div><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero numquam non vitae rerum quae eaque soluta veritatis, temporibus aliquid omnis, blanditiis vero vel magni odio quod maxime. Nam necessitatibus molestiae dicta quisquam ullam earum ducimus hic, eligendi officia illo cum itaque, et, pariatur sunt officiis facilis eum tempore. Perspiciatis, tenetur.</p></div>
+              <div>Hello</div>
+            </div>
+          </Carousel>
         </div>
       </div>
+{/* 
       <div className={styles.textContainer}>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, saepe porro fugit, autem rerum nulla quod
@@ -40,6 +50,7 @@ export const App = () => {
           <Carousel images={wideImages} />
         </div>
       </div>
+       */}
     </div>
   );
 };

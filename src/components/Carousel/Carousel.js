@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './Carousel.module.css';
 
-const Carousel = ({ images }) => {
-
+const Carousel = ({ images, children }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [blockScroll, setBlockScroll] = useState(false);
   const sliderTrack = useRef(null);
-  const imagesTotal = images.length - 1;
-  
-  let slideStep = 100 / images.length;
+  const imagesTotal = children.length - 1;
+
+  let slideStep = 100 / children.length;
   let transformTotal = 0; // to keep total translatedX value
   let transformValue = 0; // value to scroll from selected image
 
@@ -89,24 +89,39 @@ const Carousel = ({ images }) => {
     sliderTrack.current.style.transform = `translateX(${transformValue}px)`;
   };
 
+  console.log('rernder')
+
+  const handlerScroll = (e) => {
+    if (e.deltaY > 0 && !blockScroll) {
+      setBlockScroll(true)
+      handleNext();
+      setTimeout(setBlockScroll(false), 3000)
+      return;
+    }
+    if (e.deltaY < 0 && !blockScroll) {
+      setBlockScroll(true)
+      handlePrev();
+      setTimeout(setBlockScroll(false), 3000)
+      return
+    }
+  };
+
   return (
     <div className={styles.carouselContainer}>
       <div className={styles.carouselWrapper}>
         <div className={styles.carousel}>
           <div
             className={styles.slider}
-            style={{ width: `${images.length * 100}%`, touchAction: 'none' }}
+            style={{ width: `${children.length * 100}%`, touchAction: 'none' }}
             ref={sliderTrack}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchStop}
-          >
-            {images.map((i, index) => {
+            onWheel={handlerScroll}>
+            {children.map((child, index) => {
               return (
-                <div key={i.src + index} className={styles.sliderItem}>
-                  <div className={styles.sliderImageWrapper}>
-                    <img src={i.src} className={styles.sliderImage} alt="image" />
-                  </div>
+                <div key={child + index} className={styles.sliderItem}>
+                  <div className={styles.sliderImageWrapper}>{child}</div>
                 </div>
               );
             })}
@@ -120,13 +135,12 @@ const Carousel = ({ images }) => {
         </div>
 
         <div className={styles.dots}>
-          {images.map((item, index) => (
+          {children.map((child, index) => (
             <span
-              style={{ width: `${index === selectedIndex ? images.length * 1.5 : images.length}%` }}
+              style={{ width: `${index === selectedIndex ? children.length * 1.5 : children.length}%` }}
               onClick={() => goToIndex(index)}
-              key={item.src + index}
-              className={`${styles.dot} ${index === selectedIndex ? styles.active : ''}`}
-            ></span>
+              key={child + index}
+              className={`${styles.dot} ${index === selectedIndex ? styles.active : ''}`}></span>
           ))}
         </div>
       </div>

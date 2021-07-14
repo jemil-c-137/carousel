@@ -28,6 +28,7 @@
 .sliderItem {
   flex-basis: 100%;
   width: 100%;
+  padding: 0 70px; /* TODO: Придумать что-то с паддингом */
 }
 
 .sliderImageWrapper {
